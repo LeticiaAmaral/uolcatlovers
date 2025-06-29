@@ -19,9 +19,11 @@ Script Python que coleta fatos sobre gatos da API [Cat Facts](https://catfact.ni
 python -m venv venv
 
 **Linux/Mac**:
+
 source venv/bin/activate
 
 **Windows**:
+
 .\venv\Scripts\activate
 
 4. *Instale as dependências*:
