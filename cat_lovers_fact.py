@@ -1,5 +1,6 @@
 import requests
 import csv
+from datetime import datetime
 
 #Função para extrair todos os fatos de gatos
 def fetch_all_cat_facts():
@@ -16,33 +17,46 @@ def fetch_all_cat_facts():
             if r.status_code == 200:
                 data = r.json()
 
-                # Adiciona os fatos da página atual a lista
+                # Adiciona os dados da página atual a lista
                 for fact_data in data['data']:
-                    all_facts.append(fact_data['fact'])
-
-                # Verifica se há mais páginas
+                    all_facts.append({
+                        'fact': fact_data['fact'],
+                        'length': len(fact_data['fact']),
+                        'processed_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+                    })
+                
+                #Se não tiverem mais páginas encerra
                 if data['current_page'] >= data['last_page']:
                     break
 
+                #Vai para a próxima página        
                 page += 1
 
             else:
                 print("Erro ao conectar na API:", r.status_code)
             
         except Exception as e:
-            print(f"Erro ao faxer a solicitação: {e}")
+            print(f"Erro ao fazer a solicitação: {e}")
             break
     
     return all_facts
 
+#Salvar os fatos em csv
 def save_to_csv(facts, filename='cat_facts.csv'):
     try:
-        with open(filename, mode='w', newline='', encoding='utf-8') as file:
-            writer = csv.writer(file)
-            writer.writerow(['fact'])  # Cabeçalho
+        with open(filename, mode='w', newline='\n', encoding='utf-8') as file:
+            #Define as colunas
+            fieldnames = ['fact', 'length', 'processed_at']
+
+            #Define os parametros do arquivo
+            writer = csv.DictWriter(file, fieldnames=fieldnames,delimiter=';')
             
+            #Escreve os cabeçalhos
+            writer.writeheader()  
+            
+            #Escreve as linhas
             for fact in facts:
-                writer.writerow([fact])
+                writer.writerow(fact)
                 
         print(f"Dados salvos com sucesso em {filename}")
     except IOError as e:
