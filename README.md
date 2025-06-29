@@ -16,15 +16,15 @@ Script Python que coleta fatos sobre gatos da API [Cat Facts](https://catfact.ni
    cd uoicatlovers
 
 2. *Crie e ative um ambiente virtual (recomendado)*:
-python -m venv venv
+      python -m venv venv
 
-**Linux/Mac**:
+      **Linux/Mac**:
 
-source venv/bin/activate
+      source venv/bin/activate
 
-**Windows**:
+      **Windows**:
 
-.\venv\Scripts\activate
+      .\venv\Scripts\activate
 
 4. *Instale as dependências*:
 pip install -r requirements.txt
