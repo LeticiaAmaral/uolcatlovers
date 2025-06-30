@@ -77,7 +77,8 @@ Nota: para as questões a seguir, não é necessário criar uma base de dados no
 
 **Podemos utilizar a função CREATE TABLE no Bigquery para adicionar os tipos, descrições das colunas e descrição para a tabela, acredito que está seja a melhor forma de documentar para os usuários, exemplo:**
  
- ***CREATE TABLE `projeto.dataset.cat_facts` (
+ ```
+ CREATE TABLE `projeto.dataset.cat_facts` (
   id STRING OPTIONS(description="ID do fato"),
   version INT64 OPTIONS(description="Versão do documento"),
   text STRING OPTIONS(description="Fato sobre gatos"),
@@ -88,7 +89,8 @@ Nota: para as questões a seguir, não é necessário criar uma base de dados no
 )
 OPTIONS (
   description = "Tabela com fatos sobre gatos."
-);***
+);
+```
 
 
 
@@ -96,13 +98,16 @@ OPTIONS (
 
 **Me baseando na documentação disponibilizado no link https://alexwohlbruck.github.io/cat-facts/docs/endpoints/facts.html, podemos utilizar o seguinte código para verificar os fatos de Agosto de 2020:**
 
-***SELECT fact, FORMAT_TIMESTAMP('%Y-%m', processed_at) AS mes_ano
+```
+SELECT fact, FORMAT_TIMESTAMP('%Y-%m', processed_at) AS mes_ano
 FROM `cat_facts`
-where FORMAT_TIMESTAMP('%Y-%m', processed_at) = '2020-08';***
+where FORMAT_TIMESTAMP('%Y-%m', processed_at) = '2020-08';
+```
 
 5 - O time de desenvolvimento soube da sua habilidade com consultas SQL e decidiu se aproveitar da fila de demandas para solicitar uma amostra da base de fatos sobre gatos (cat facts) para popular o ambiente de QA deles. O time solicitou uma consulta SQL que extraia, de forma aleatória, 10% dos registros da base contendo as informações de texto, data de criação e data de atualização. Uma consideração importante feita pelo time de desenvolvimento é que eles precisam da consulta SQL para extrair os dados para um arquivo CSV separado por vírgulas. 
 
-***WITH total_registros AS (
+```
+WITH total_registros AS (
   SELECT COUNT(*) AS total FROM `cat_facts`
 ),
 dados_numerados AS (
@@ -120,6 +125,7 @@ FROM
   dados_numerados,
   total_registros
 WHERE
-  linha <= (SELECT total / 10 FROM total_registros)***
+  linha <= (SELECT total / 10 FROM total_registros)
+```
   
 **Após rodar o SQL o próprio BigQuery oferece a opção de exportar os resultados como csv, só é necessário entrar na opção "save results" e selecionar como deseja salvar**
