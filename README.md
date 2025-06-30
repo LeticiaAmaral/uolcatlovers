@@ -48,7 +48,8 @@ As respostas devem constar em um repositório no GitHub e o link do repositório
 
 1 - Como a startup foi recém criada, ainda não há uma grande demanda pelos dados, então você precisa desenvolver um script Python simples que extraía os dados de fatos sobre gatos (cat facts) da API e salva em um arquivo CSV local. 
 
-**Como a API do https://cat-fact.herokuapp.com/facts não estava disponível foi utilizada a API https://catfact.ninja/facts**
+**Como a API do https://cat-fact.herokuapp.com/facts não estava disponível foi utilizada a API https://catfact.ninja/facts para obter os dados**
+
 **O código python (cat_lovers_fact.py) e o arquivo csv(cat_facts.csv) se encontram salvos neste repositório para avaliação**
 
 2 - Com o tempo, o aplicativo ganhou popularidade e o número de fatos sobre gatos cresceu exponencialmente. Agora, a solução local não é mais viável e é necessário transpor a solução para a nuvem. Você precisa projetar uma arquitetura na plataforma Google Cloud que seja capaz de extrair, armazenar e disponibilizar os dados para os times de anaytics. Não é necessário implementar ou codificar, apenas desenhar a arquitetura. 
